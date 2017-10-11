@@ -18,7 +18,6 @@
 
 #import <Foundation/Foundation.h>
 #import "GTMDefines.h"
-#import <CommonCrypto/CommonDigest.h>
 // GTMBase64
 //
 /// Helper for handling Base64 and WebSafeBase64 encodings

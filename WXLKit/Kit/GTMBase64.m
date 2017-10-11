@@ -17,6 +17,7 @@
 //
 
 #import "GTMBase64.h"
+#import <CommonCrypto/CommonDigest.h>
 
 
 

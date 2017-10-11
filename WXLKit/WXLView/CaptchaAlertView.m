@@ -10,7 +10,6 @@
 #import "UIView+WXL.h"
 #import "UIColor+WXL.h"
 #import "NSString+WXL.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "WXLMacro.h"
 
 @interface CaptchaAlertView ()

@@ -7,10 +7,10 @@
 //
 
 #import "WXLHttpManager.h"
-#import <AFNetworking.h>
 #import "NSString+WXL.h"
 #import "WXLMacro.h"
 #import <AVFoundation/AVFoundation.h>
+#import "AFNetworking.h"
 
 @implementation WXLHttpManager
 
@@ -176,7 +176,7 @@
                 NSError *error = nil;
                 NSString *filePath = filePaths[i];
                 NSString *fileName = fileNames[i];
-                [formData appendPartWithFileURL:[NSURL URLWithString:filePath] name:[NSString stringWithFormat:@"file%lu",i] fileName:fileName mimeType:@"application/octet-stream" error:&error];
+                [formData appendPartWithFileURL:[NSURL URLWithString:filePath] name:[NSString stringWithFormat:@"file%zd",i] fileName:fileName mimeType:@"application/octet-stream" error:&error];
                 if (failure && error)
                 {
                     failure(error);
@@ -195,10 +195,10 @@
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 formatter.dateFormat = @"yyyyMMddHHmmss";
                 NSString *str = [formatter stringFromDate:[NSDate date]];
-                NSString *imageFileName = [NSString stringWithFormat:@"%@%ld.%@",str,i,imageType?:@"jpg"];
+                NSString *imageFileName = [NSString stringWithFormat:@"%@%zd.%@",str,i,imageType?:@"jpg"];
                 
                 [formData appendPartWithFileData:imageData
-                                            name:[NSString stringWithFormat:@"image%lu",i]
+                                            name:[NSString stringWithFormat:@"image%zd",i]
                                         fileName:imageNames ? [NSString stringWithFormat:@"%@.%@",imageNames[i],imageType?:@"jpg"] : imageFileName
                                         mimeType:[NSString stringWithFormat:@"image/%@",imageType ?: @"jpg"]];
             }
