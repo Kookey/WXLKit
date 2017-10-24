@@ -47,11 +47,6 @@
 
 -(BOOL) isMobile;
 
--(BOOL) isBlank;
-
-
--(BOOL) isNotBlank;
-
 -(BOOL) validWithRegex:(NSString *) regex;
 
 #pragma mark 是否是身份证号

@@ -7,6 +7,7 @@
 //
 
 #import "NSString+WXL.h"
+#import "WXLMacro.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (WXL)
@@ -43,26 +44,6 @@
     
     return sha1;
 }
-#pragma mark
-
--(BOOL)isBlank
-{
-    if (self == nil || self == NULL) {
-        return YES;
-    }
-    if ([self isKindOfClass:[NSNull class]]) {
-        return YES;
-    }
-    if ([[self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
-        return YES;
-    }
-    return NO;
-}
-
--(BOOL)isNotBlank
-{
-    return ![self isBlank];
-}
 
 #pragma mark -
 
@@ -73,7 +54,8 @@
 
 -(BOOL) validWithRegex:(NSString *) regex
 {
-    if ([self isBlank]) {
+    
+    if (isBlank(self)) {
         return NO;
     }
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
