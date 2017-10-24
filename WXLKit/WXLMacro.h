@@ -59,6 +59,13 @@
 #define WXLFONT18  [UIFont systemFontOfSize:18.0f]
 #define WXLFONT20  [UIFont systemFontOfSize:20.0f]
 
+//字体的
+#define  isBlank(string) string == nil || string == NULL ||[string isKindOfClass:[NSNull class]]|| [string isEqualToString:@""] ||[[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 ? YES : NO
+#define isNotBlank(string) string == nil || string == NULL ||[string isKindOfClass:[NSNull class]]|| [string isEqualToString:@""] ||[[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 ? NO : YES
+
+//weak and strong
+#define WXLWeakObj(o) autoreleasepool{} __weak typeof(o) o##Weak = o;
+#define WXLStrongObj(o) autoreleasepool{} __strong typeof(o) o = o##Weak;
 
 #define WXLBlock_Safe_Run(block, ...) block ? block(__VA_ARGS__) : nil
 
