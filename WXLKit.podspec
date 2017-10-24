@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "WXLKit"
-  s.version      = "2.0.0"
+  s.version      = "2.0.1"
   s.summary      = "通用工具箱."
 
   # This description is used to generate tags and improve search results.
@@ -26,6 +26,8 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
       通用工具箱,作为项目开发的基础库
+      1、HttpManager 添加网络监控
+      2、在WXLMacro.h中添加weak,strong宏
                    DESC
 
   s.homepage     = "https://github.com/Kookey/WXLKit"
@@ -68,7 +70,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  s.ios.deployment_target = "6.0"
+  s.ios.deployment_target = "8.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
