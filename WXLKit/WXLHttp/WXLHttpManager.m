@@ -317,7 +317,7 @@
 +(AFHTTPSessionManager *) initSessionManager
 {
     NSString *url = [HttpManagerConfig sharedConfig].url;
-    if ([url isBlank]) {
+    if (isBlank(url)) {
         @throw [NSException exceptionWithName:@"Throwing a HttpManager exception" reason:@"please call [HttpManagerConfig sharedConfig].url=? in AppDelegate fisrt" userInfo:nil];
     }
     NSURL * URL = [[NSURL alloc] initWithString:url];
@@ -328,12 +328,10 @@
 +(void) setToken:(AFHTTPSessionManager *)manager
 {
     NSString *headerToken = [HttpManagerConfig sharedConfig].headerToken;
-    if ([headerToken isBlank]) {
+    if (isBlank(headerToken)) {
         @throw [NSException exceptionWithName:@"Throwing a HttpManager exception" reason:@"please call [HttpManagerConfig sharedConfig].headerToken=? in AppDelegate fisrt" userInfo:nil];
     }
-    if ([[HttpManagerConfig token] isNotBlank]) {
-        [manager.requestSerializer setValue:[HttpManagerConfig token] forHTTPHeaderField:headerToken];
-    }
+    [manager.requestSerializer setValue:[HttpManagerConfig token] forHTTPHeaderField:headerToken];
 }
 
 @end

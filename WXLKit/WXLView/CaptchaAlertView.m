@@ -122,7 +122,7 @@ const NSInteger kMaxByteOfAlarmName = 4;
 
 -(void)refreshCaptcha
 {
-    if([self.phone isNotBlank])
+    if(isNotBlank(self.phone))
     {
         NSString *captchaUrl = [NSString stringWithFormat:@"%@?phone=%@",self.url,self.phone];
         NSURLSession *session = [NSURLSession sharedSession];
