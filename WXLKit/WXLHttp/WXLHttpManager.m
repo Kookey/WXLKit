@@ -14,6 +14,55 @@
 
 @implementation WXLHttpManager
 
+#pragma mark - 类方法监控手机的网络状态
++ (void)wxl_networkStatusWithBlock:(WXLNetworkStatus)networkStatus
+{
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                networkStatus ? networkStatus(WXLNetworkStatusUnknown) : nil;
+                //未知网络
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                networkStatus ? networkStatus(WXLNetworkStatusNotReachable) : nil;
+                //无网络
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                networkStatus ? networkStatus(WXLNetworkStatusReachableViaWWAN) : nil;
+                //手机自带网络
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                networkStatus ? networkStatus(WXLNetworkStatusReachableViaWiFi) : nil;
+                //WIFI
+                break;
+        }
+    }];
+}
+
++ (void)wxl_startMonitoring
+{
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
++ (void)wxl_stopMonitoring
+{
+    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+}
+
++ (BOOL)wxl_isNetwork
+{
+    return [AFNetworkReachabilityManager sharedManager].reachable;
+}
+
++ (BOOL)wxl_isWWANNetwork {
+    return [AFNetworkReachabilityManager sharedManager].reachableViaWWAN;
+}
+
++ (BOOL)wxl_isWiFiNetwork {
+    return [AFNetworkReachabilityManager sharedManager].reachableViaWiFi;
+}
+
 
 //提交json格式的数据 Content-Type: application/json
 

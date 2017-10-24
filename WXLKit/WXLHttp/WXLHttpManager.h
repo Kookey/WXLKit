@@ -16,7 +16,32 @@ typedef void (^HttpFailure)(NSError *error);
 // 上传或者下载的进度, Progress.completedUnitCount:当前大小 - Progress.totalUnitCount:总大小
 typedef void (^HttpProgress)(NSProgress *progress);
 
+typedef NS_ENUM(NSUInteger, WXLNetworkStatusType) {
+    /// 未知网络
+    WXLNetworkStatusUnknown,
+    /// 无网络
+    WXLNetworkStatusNotReachable,
+    /// 手机网络
+    WXLNetworkStatusReachableViaWWAN,
+    /// WIFI网络
+    WXLNetworkStatusReachableViaWiFi
+};
+
+/// 网络状态的Block
+typedef void(^WXLNetworkStatus)(WXLNetworkStatusType status);
+
 @interface WXLHttpManager : NSObject
+
+
++ (void)wxl_networkStatusWithBlock:(WXLNetworkStatus)networkStatus;
+
++ (BOOL)wxl_isNetwork;
+
++ (BOOL)wxl_isWWANNetwork;
+
++ (BOOL)wxl_isWiFiNetwork;
+
++(void)wxl_startMonitoring;
 
 //提交json格式的数据 Content-Type: application/json
 /**
