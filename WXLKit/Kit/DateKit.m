@@ -83,9 +83,10 @@
 + (NSString *)dateDisplayResult:(long long)secondCount
 {
     NSDate *date = [self secondToDate:secondCount];
-    NSCalendar *calender = [NSCalendar currentCalendar];
+
+    NSCalendar *calendar = [NSCalendar currentCalendar];
     //判断是否是今天
-    if ([calender isDateInToday:date]) {
+    if ([calendar isDateInToday:date]) {
 
         long long dateSecondCount = [[NSDate date] timeIntervalSinceDate:date];
         if (dateSecondCount < 60) {
@@ -99,17 +100,28 @@
     
     //判断是否是昨天
     NSString *formatterString = @" HH:mm";
-    if ([calender isDateInYesterday:date]) {
+    if ([calendar isDateInYesterday:date]) {
         formatterString = [@"昨天" stringByAppendingString:formatterString];
     } else {
-        //判断是否是一年内
-        formatterString = [@"MM-dd" stringByAppendingString:formatterString];
-        //判断是否值一年之前
-        NSDateComponents *component = [calender components:NSCalendarUnitYear fromDate:date toDate:[NSDate date] options:NSCalendarWrapComponents];
-        
-        if (component.year >= 1) {
-            formatterString = [@"yyyy-" stringByAppendingString:formatterString];
-        }
+      NSDateComponents *dayComponent = [calendar components:NSCalendarUnitDay fromDate:date toDate:[NSDate date] options:NSCalendarWrapComponents];
+      NSInteger day = dayComponent.day;
+      if (day==2) {
+        return @"前天";
+      }else if (day > 2 && day < 31){
+        return [NSString stringWithFormat:@"%ld天前", day];
+      }else if(day >= 31 && day <= 62){
+        return @"一个月前";
+      }else if(day > 62 && day <= 93){
+        return @"2个月前";
+      }else if(day > 93 && day <= 124){
+        return @"3个月前";
+      }
+      NSDateComponents *components = [calendar components:NSCalendarUnitYear fromDate:date];
+      NSDateComponents *componentsNow = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
+      formatterString = [@"MM-dd" stringByAppendingString:formatterString];
+      if(components.year != componentsNow.year ){
+       formatterString = [@"yyyy-" stringByAppendingString:formatterString];
+      }
     }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:formatterString];
