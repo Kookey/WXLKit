@@ -108,7 +108,7 @@
         NSDateComponents *component = [calender components:NSCalendarUnitYear fromDate:date toDate:[NSDate date] options:NSCalendarWrapComponents];
         
         if (component.year >= 1) {
-            formatterString = [@"YYYY-" stringByAppendingString:formatterString];
+            formatterString = [@"yyyy-" stringByAppendingString:formatterString];
         }
     }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
