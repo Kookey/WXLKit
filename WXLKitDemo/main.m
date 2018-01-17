@@ -13,9 +13,11 @@
 int main(int argc, char * argv[]) {
      {
       
-        //return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-      NSString *result = [DateKit dateDisplayResult:1501553410];
-      NSLog(@"%@", result);
-      return 0;
+      return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+     
+      //Test 测试时间处理问题
+//      NSString *result = [DateKit dateDisplayResult:1501553410];
+//      NSLog(@"%@", result);
+//      return 0;
     }
 }
